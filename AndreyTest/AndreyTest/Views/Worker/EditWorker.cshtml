@@ -1,0 +1,72 @@
+﻿@using AndreyTest.Models
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>Работа с БД</title>
+</head>
+<body>
+<h2>[РЕДАКТИРОВАНИЕ]</h2>
+<form action="editWorker" method="get">
+    <select name="id">
+        @foreach (var worker in ViewBag.ListWorkers)
+        {
+            if (worker.Equals(ViewBag.Worker))
+            {
+                <option value="@(((Worker) worker).Id)" selected="selected">
+                    @(((Worker) worker).Id) || @(((Worker) worker).SecondName) @(((Worker) worker).Name)
+                </option>
+            }
+            else
+            {
+                <option value="@(((Worker) worker).Id)">
+                    @(((Worker) worker).Id) || @(((Worker) worker).SecondName) @(((Worker) worker).Name)
+                </option>
+            }
+        }
+    </select>
+    <input type="submit" value="Найти" />
+</form>
+<form action="editWorker/action" method="post" enctype="application/x-www-form-urlencoded">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Email</th>
+        </tr>
+        <tr>
+            <td>@(((Worker) ViewBag.Worker).Id)</td>
+            <td>@(((Worker) ViewBag.Worker).Name)</td>
+            <td>@(((Worker) ViewBag.Worker).SecondName)</td>
+            <td>@(((Worker) ViewBag.Worker).Patronymic)</td>
+            <td>@(((Worker) ViewBag.Worker).Email)</td>
+        </tr>
+        <tr>
+            <td>
+                <input name="Id" value="@(((Worker) ViewBag.Worker).Id)" readonly/>
+            </td>
+            <td>
+                <input name="SecondName" id="SecondName" type="text" value="@(((Worker) ViewBag.Worker).SecondName)"/>
+            </td>
+            <td>
+                <input name="Name" id="Name" type="text" value="@(((Worker) ViewBag.Worker).Name)"/>
+            </td>
+            <td>
+                <input name="Patronymic" id="Patronymic" type="text" value="@(((Worker) ViewBag.Worker).Patronymic)"/>
+            </td>
+            <td>
+                <input name="Email" id="Email" type="text" value="@(((Worker) ViewBag.Worker).Email)"/>
+            </td>
+        </tr>
+    </table>
+    <div>
+        <input type="submit" value="Принять" />
+    </div>
+</form>
+<form action="workerView">
+    <button>[НАЗАД]</button>
+</form>
+</body>
+</html>

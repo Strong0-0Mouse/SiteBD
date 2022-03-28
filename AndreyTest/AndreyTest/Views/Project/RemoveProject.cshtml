@@ -1,0 +1,25 @@
+﻿@using AndreyTest.Models
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>Работа с БД</title>
+</head>
+<body>
+<h2>[УДАЛЕНИЕ]</h2>
+<form action="removeProject" method="get">
+    <select name="id">
+        @foreach (var project in ViewBag.ListProjects)
+        {
+            <option value="@(((Project) project).Id)">
+                @(((Project) project).Id) || @(((Project) project).NameProject)
+            </option>
+        }
+    </select>
+    <input type="submit" value="Удалить"/>
+</form>
+<form action="workerView">
+    <button>[НАЗАД]</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,156 @@
+﻿@using AndreyTest.Models
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>Работа с БД</title>
+</head>
+<body>
+<h2>[РЕДАКТИРОВАНИЕ]</h2>
+<form action="editProject" method="get">
+    <select name="id">
+        @foreach (var project in ViewBag.ListProjects)
+        {
+            if (project.Equals(ViewBag.Project))
+            {
+                <option value="@(((Project) project).Id)" selected="selected">
+                    @(((Project) project).Id) || @(((Project) project).NameProject)
+                </option>
+            }
+            else
+            {
+                <option value="@(((Project) project).Id)">
+                    @(((Project) project).Id) || @(((Project) project).NameProject)
+                </option>
+            }
+        }
+    </select>
+    <input type="submit" value="Найти" />
+</form>
+<form action="editProject/action" method="post" enctype="application/x-www-form-urlencoded">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Имя проекта</th>
+            <th>Название компании-заказчика</th>
+            <th>Название компании-исполнителя</th>
+            <th>Дата начала</th>
+            <th>Дата конца</th>
+            <th>Приоритет</th>
+        </tr>
+        <tr>
+            <td>@(((Project) ViewBag.Project).Id)</td>
+            <td>@(((Project) ViewBag.Project).NameProject)</td>
+            <td>@(((Project) ViewBag.Project).NameCustomerCompany)</td>
+            <td>@(((Project) ViewBag.Project).NamePerformingCompany)</td>
+            <td>@(((Project) ViewBag.Project).StartTime)</td>
+            <td>@(((Project) ViewBag.Project).EndTime)</td>
+            <td>@(((Project) ViewBag.Project).Priority)</td>
+        </tr>
+        <tr>
+            <td>
+                <input name="Id" value="@(((Project) ViewBag.Project).Id)" readonly/>
+            </td>
+            <td>
+                <input name="NameProject" type="text" value="@(((Project) ViewBag.Project).NameProject)"/>
+            </td>
+            <td>
+                <input name="NameCustomerCompany" type="text" value="@(((Project) ViewBag.Project).NameCustomerCompany)"/>
+            </td>
+            <td>
+                <input name="NamePerformingCompany" type="text" value="@(((Project) ViewBag.Project).NamePerformingCompany)"/>
+            </td>
+            <td>
+                <input name="StartTime" type="Date" value="@(((Project) ViewBag.Project).StartTime.Date)"/>
+            </td>
+            <td>
+                <input name="EndTime" type="Date" value="@(((Project) ViewBag.Project).EndTime.Date)"/>
+            </td>
+            <td>
+                <input name="Priority" type="number" value="@(((Project) ViewBag.Project).Priority)"/>
+            </td>
+        </tr>
+    </table>
+    <div>
+        <input type="submit" value="Принять" />
+    </div>
+</form>
+<form action="editLeaderProject/action" method="post" enctype="application/x-www-form-urlencoded">
+    <table>
+        <tr>
+            <th>Лидер</th>
+        </tr>
+        <tr>
+            @if (((Project) ViewBag.Project).Leader != null)
+            {
+                <td>@(((Project) ViewBag.Project).Leader.Id) || @(((Project) ViewBag.Project).Leader.SecondName) @(((Project) ViewBag.Project).Leader.Name)</td>
+            }
+            else
+            {
+                <td>null</td>
+            }
+        </tr>
+        <tr>
+            <td>
+                <select name="idLeader">
+                    @foreach (var worker in ViewBag.ListWorkers)
+                    {
+                        <option value="@(((Worker) worker).Id)">
+                            @(((Worker) worker).Id) || @(((Worker) worker).SecondName) @(((Worker) worker).Name)
+                        </option>
+                    }
+                </select>
+            </td>
+        </tr>
+    </table>
+    <div>
+        <input type="submit" value="Принять" />
+    </div>
+</form>
+<form action="editPerformersProject/action" method="post" enctype="application/x-www-form-urlencoded">
+    <table>
+        <tr>
+            <th>Исполнители</th>
+        </tr>
+        <tr>
+            <td>
+                @if (((Project) ViewBag.Project).Performers != null)
+                {
+                    <ul>
+                        @foreach (var performer in ((Project) ViewBag.Project).Performers)
+                        {
+                            <li>
+                                @(performer.Id) || @(performer.Worker.SecondName) @(performer.Worker.Name)
+                            </li>
+                        }
+                    </ul>
+
+                }
+                else
+                {
+                    <p>null</p>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select name="idPerformers" multiple="multiple">
+                    @foreach (var worker in ViewBag.ListWorkers)
+                    {
+                        <option value="@(((Worker) worker).Id)">
+                            @(((Worker) worker).Id) || @(((Worker) worker).SecondName) @(((Worker) worker).Name)
+                        </option>
+                    }
+                </select>
+            </td>
+        </tr>
+    </table>
+    <div>
+        <input type="submit" value="Принять" />
+    </div>
+</form>
+<form action="projectView">
+    <button>[НАЗАД]</button>
+</form>
+</body>
+</html>

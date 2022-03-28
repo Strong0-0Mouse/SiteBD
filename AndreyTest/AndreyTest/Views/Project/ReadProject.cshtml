@@ -1,0 +1,64 @@
+﻿@using AndreyTest.Models
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>Работа с БД</title>
+</head>
+<body>
+<h2>[ЧТЕНИЕ]</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Имя проекта</th>
+        <th>Название компании-заказчика</th>
+        <th>Название компании-исполнителя</th>
+        <th>Лидер</th>
+        <th>Исполнители</th>
+        <th>Дата начала</th>
+        <th>Дата конца</th>
+        <th>Приоритет</th>
+    </tr>
+    @foreach (var project in ViewBag.ListProjects)
+    {
+        <tr>
+            <td>@(((Project) project).Id)</td>
+            <td>@(((Project) project).NameProject)</td>
+            <td>@(((Project) project).NameCustomerCompany)</td>
+            <td>@(((Project) project).NamePerformingCompany)</td>
+            @if (((Project) project).Leader == null)
+            {
+                <td>null</td>
+            }
+            else
+            {
+                <td>
+                    @(((Project) project).Leader.Id) || @(((Project) project).Leader.SecondName) @(((Project) project).Leader.Name)
+                </td>
+            }
+            <td>
+                @if (((Project) project).Performers != null)
+                {
+                    <ul>
+                        @foreach (var performer in ((Project) project).Performers)
+                        {
+                            <li>@performer.Worker.Id || @performer.Worker.SecondName @performer.Worker.Name</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>null</p>
+                }
+            </td>
+            <td>@(((Project) project).StartTime)</td>
+            <td>@(((Project) project).EndTime)</td>
+            <td>@(((Project) project).Priority)</td>
+        </tr>
+    }
+</table>
+<form action="projectView">
+    <button>[НАЗАД]</button>
+</form>
+</body>
+</html>

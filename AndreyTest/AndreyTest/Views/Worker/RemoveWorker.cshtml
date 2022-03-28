@@ -1,0 +1,25 @@
+﻿@using AndreyTest.Models
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>Работа с БД</title>
+</head>
+<body>
+<h2>[УДАЛЕНИЕ]</h2>
+<form action="removeWorker" method="get">
+    <select name="id">
+        @foreach (var worker in ViewBag.ListWorkers)
+        {
+            <option value="@(((Worker) worker).Id)">
+                @(((Worker) worker).Id) || @(((Worker) worker).SecondName) @(((Worker) worker).Name)
+            </option>
+        }
+    </select>
+    <input type="submit" value="Удалить"/>
+</form>
+<form action="workerView">
+    <button>[НАЗАД]</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,33 @@
+﻿@using AndreyTest.Models
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>Работа с БД</title>
+</head>
+<body>
+<h2>[ЧТЕНИЕ]</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Отчество</th>
+        <th>Email</th>
+    </tr>
+    @foreach (var worker in ViewBag.ListWorkers)
+    {
+        <tr>
+            <td>@(((Worker) worker).Id)</td>
+            <td>@(((Worker) worker).SecondName)</td>
+            <td>@(((Worker) worker).Name)</td>
+            <td>@(((Worker) worker).Patronymic)</td>
+            <td>@(((Worker) worker).Email)</td>
+        </tr>
+    }
+</table>
+<form action="workerView">
+    <button>[НАЗАД]</button>
+</form>
+</body>
+</html>

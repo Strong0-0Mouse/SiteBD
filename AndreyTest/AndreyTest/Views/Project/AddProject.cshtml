@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>Работа с БД</title>
+</head>
+<body>
+<h2>[ДОБАВЛЕНИЕ]</h2>
+<form action="addProject/action" method="post" enctype="application/x-www-form-urlencoded">
+    <div>
+        <label for="NameProject">Название проекта</label>
+        <input name="NameProject" id="NameProject" type="text"/>
+    </div>
+    <div>
+        <label for="NameCustomerCompany">Название компании-заказчика</label>
+        <input name="NameCustomerCompany" id="NameCustomerCompany" type="text"/>
+    </div>
+    <div>
+        <label for="NamePerformingCompany">Название компании-исполнителя</label>
+        <input name="NamePerformingCompany" id="NamePerformingCompany" type="text"/>
+    </div>
+    <div>
+        <label for="StartTime">Время начала</label>
+        <input name="StartTime" id="StartTime" type="Date"/>
+    </div>
+    <div>
+        <label for="EndTime">Время окончания</label>
+        <input name="EndTime" id="EndTime" type="Date"/>
+    </div>
+    <div>
+        <label for="Priority">Приоритет</label>
+        <input name="Priority" id="Priority" type="number"/>
+    </div>
+    <div>
+        <input type="submit" value="Принять" />
+    </div>
+</form>
+</body>
+</html>
